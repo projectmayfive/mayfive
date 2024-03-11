@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WXNh</title>
+    <style>
+      body,
+      html {
+        overflow: hidden;
+      }
+      .wrapper {
+        height: 100vh;
+        /* This part is important for centering */
+        display: grid;
+        place-items: center;
+      }
+
+      .typing-demo {
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid;
+        font-family: monospace;
+        font-size: 1.5em;
+        cursor: pointer; /* Add this to make the div clickable */
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+      }
+
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="typing-demo" id="typing-demo" onclick="changeText()"></div>
+    </div>
+
+    <script>
+      var messages = [
+        "click me",
+        "happy birthday to the...",
+        "shortest....jk",
+        "the most mesmerizing...",
+        "mermaid i know.",
+        "enjoy your day ysa <3",
+        "...",
+        "wanna grab milktea sometime?",
+      ];
+
+      var currentMessageIndex = 0;
+
+      function changeText() {
+        // Get the element
+        var typingDemo = document.getElementById("typing-demo");
+
+        // Get the number of characters in the new text content
+        var textLength = messages[currentMessageIndex].length;
+
+        // Clear existing animation styles
+        typingDemo.style.animation = "none";
+
+        // Change the text content to the next message
+        typingDemo.textContent = messages[currentMessageIndex];
+
+        // Move to the next message in the array
+        currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+
+        // Set the animation dynamically using JavaScript
+        typingDemo.style.width = textLength + "ch";
+
+        // Apply the typing animation again
+        setTimeout(function () {
+          typingDemo.style.animation = `typing 2s steps(${textLength}), blink 0.5s step-end infinite alternate`;
+        }, 10); // Add a small delay to allow the animation to reset
+      }
+
+      // Trigger the animation on page load
+      window.onload = changeText;
+    </script>
+    <!-- <script>
+      // Event listener for keydown event
+      document.addEventListener("keydown", function (event) {
+        // Check if the pressed key is 'Y' or 'y'
+        if (event.key === "Y" || event.key === "y") {
+          // Show an alert when 'Y' key is pressed
+          alert("YEY <3");
+        }
+      });
+    </script> -->
+  </body>
+</html>
